@@ -7,7 +7,7 @@ $(document).ready(function(){
     // The format for the current hour is HH, which means it is represented 09
     var currentHour = moment().format('HH');                       
 
-    // Array to display hours in the first column
+    // Array just for displaying the hours in the first column of the webpage
     var workingHoursDisplay = ["09 AM", "10 AM", "11 AM", "12 PM", "01 PM", "02 PM", "03 PM", "04 PM", "05 PM"];
 
     // Array to calculate the hours and add classes
@@ -20,29 +20,23 @@ $(document).ready(function(){
 
     // Loop through the working hours array.
     for (var i=0; i < workingHours.length; i++){
-    
-        var timeSlot = $("<div class='col-1 hour' data-row='time"+ workingHours[i] +"'>" + workingHoursDisplay[i] + "</div>");
-        var textSlot = $("<textArea class='col-10 text-area description' data-row='text"+ workingHours[i] +"'></textArea>");
-        var saveSlot = $("<button class='col-1 btn btn-primary saveBtn fas fa-save' data-row='save"+ workingHours[i] +"'></button>");
-        // console.log(workingHours[i]);
         
-
+        // Create slots for the time, the text area and the button
+        var timeSlot = $("<div class='col-1 hour' data-row='"+ workingHours[i] +"'>" + workingHoursDisplay[i] + "</div>");
+        var textSlot = $("<textArea class='col-10 text-area description' id='"+ workingHours[i] +"'></textArea>");
+        var saveSlot = $("<button class='col-1 btn btn-primary saveBtn fas fa-save' data-row='"+ workingHours[i] +"'></button>");
+        
+        // Create booleans to compare the hours with the current hour
         var isSameTime = moment(workingHours[i]).isSame(currentHour);
-        // console.log(isSameTime);
         var isPreviousTime = moment(workingHours[i]).isBefore(currentHour);
-        // console.log(isPreviousTime);
 
-        console.log(workingHours[i]);
-        console.log(currentHour);
-
+        // Create conditionals to place the text area in the past, present or future
+        // Also, append the time, text and buttons
         if(isSameTime){
-            
             textSlot.addClass('present');
             timeBlockPresentRow.append(timeSlot, textSlot, saveSlot);
 
         } else if(isPreviousTime) {
-            // console.log(workingHours[i]);
-            // console.log(moment().format('H'));
             textSlot.addClass('past');
             timeBlockPastRow.append(timeSlot, textSlot, saveSlot);
         }
@@ -50,35 +44,35 @@ $(document).ready(function(){
             textSlot.addClass('future');
             timeBlockFutureRow.append(timeSlot, textSlot, saveSlot);
         }
-        // if(moment(workingHours[i]).isSame(currentHour)){ 
-        //     textSlot.addClass("present");                                       
-        //     timeBlockPresentRow.append(timeSlot);
-        //     timeBlockPresentRow.append(textSlot);
-        //     timeBlockPresentRow.append(saveSlot);
-        //     console.log("Current hour = " + currentHour + " Working hours = " + workingHours[i] + " using isSame");
         
-        // } else if (moment(workingHours[i]).isBefore(currentHour)){
-        //     textSlot.addClass("past");
-        //     timeBlockPastRow.append(timeSlot);
-        //     timeBlockPastRow.append(textSlot);
-        //     timeBlockPastRow.append(saveSlot);
-        //     console.log("Current hour = " + currentHour + " Working hours = " + workingHours[i] + " using isBefore");
-        // }
-        // else {
-        //     textSlot.addClass("future");
-        //     timeBlockFutureRow.append(timeSlot);
-        //     timeBlockFutureRow.append(textSlot);
-        //     timeBlockFutureRow.append(saveSlot);
-        //     console.log("Current hour = " + currentHour + " Working hours = " + workingHours[i] + " using else");
-        //     // console.log("Current hour is " + currentHour);
-        //     // console.log("Is the working hour " + workingHours[i] + " before the current hour " + currentHour + "? " + moment(workingHours[i]).isBefore(currentHour));
-        // }
+    } // end for loop
 
-        // hourCol.append(timeSlot);
-        // textAreaCol.append(textSlot);
-        // saveButtonCol.append(saveSlot); 
-    }
+    // When the user clicks on a button, do something:
+    $("button").on("click", function(){         
 
+        // grab the data-row attribute value where the button was clicked
+        var buttonSlotPressed = $(this).attr("data-row");  
 
+        // grab the text area in the same slot
+        var textArea = $("#" + buttonSlotPressed).val();
+        console.log($("#" + buttonSlotPressed));
+        console.log(textArea);
+
+        // use the data-row attribute value to grab the text inside the text area
+        // var id = buttonSlotPressed;
+        // var textInSameSlot = $("textArea").attr('id"').val();
+
+        // // store the data-row attribute and the text in the text area
+        localStorage.setItem(buttonSlotPressed, textArea);
+
+    }); // end of button on click function
 
 })
+
+// // Here we grab the text from the input box
+// var movie = $("#movie-input").val();
+// data-row="save09"
+// var movie = $(this).attr("data-name");
+// div
+// document.querySelector("body > div > div.row.time-block.after > textarea:nth-child(2)")
+// document.querySelector("body > div > div.row.time-block.after > textarea:nth-child(2)")
