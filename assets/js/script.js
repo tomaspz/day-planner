@@ -55,24 +55,10 @@ $(document).ready(function(){
 
         // grab the text area in the same slot
         var textArea = $("#" + buttonSlotPressed).val();
-        console.log($("#" + buttonSlotPressed));
-        console.log(textArea);
 
-        // use the data-row attribute value to grab the text inside the text area
-        // var id = buttonSlotPressed;
-        // var textInSameSlot = $("textArea").attr('id"').val();
-
-        // // store the data-row attribute and the text in the text area
+        // store the data-row attribute and the text in the text area
         localStorage.setItem(buttonSlotPressed, textArea);
 
-    }); // end of button on click function
+    }); // end on click function
 
 })
-
-// // Here we grab the text from the input box
-// var movie = $("#movie-input").val();
-// data-row="save09"
-// var movie = $(this).attr("data-name");
-// div
-// document.querySelector("body > div > div.row.time-block.after > textarea:nth-child(2)")
-// document.querySelector("body > div > div.row.time-block.after > textarea:nth-child(2)")
