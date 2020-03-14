@@ -22,7 +22,7 @@ This app is perfect for an employee with a busy schedule that wants to add impor
 
 ## Screenshot
 
-https://github.com/tomaspz/day-planner/assets/images/screenshot-work-days-planner.png
+https://github.com/tomaspz/day-planner/blob/master/assets/images/screenshot-work-days-planner.png
 
 ## URL of the deployed application.
 
